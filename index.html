@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Sprint - Interactive Quiz App</title>
+    <meta name="description" content="A highly responsive and interactive quiz application featuring multiple difficulties and a countdown timer. Test your knowledge across a variety of questions.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <div class="glass-panel text-center">
+                <div class="logo-container">
+                    <h1 class="app-title">Time <span class="highlight">Sprint</span></h1>
+                    <div class="subtitle">Test your knowledge against the clock</div>
+                </div>
+                
+                <div class="topic-selector">
+                    <h2>Enter Quiz Topic</h2>
+                    <input type="text" id="topic-input" class="topic-input" placeholder="e.g. Science, Sports, History, etc." autocomplete="off">
+                </div>
+
+                <div class="difficulty-selector">
+                    <h2>Select Difficulty</h2>
+                    <div class="difficulty-options">
+                        <button class="diff-btn" data-level="easy">Easy</button>
+                        <button class="diff-btn active" data-level="medium">Medium</button>
+                        <button class="diff-btn" data-level="hard">Hard</button>
+                    </div>
+                    <div class="time-info" id="time-info-text">Time per question: 15s</div>
+                </div>
+                
+                <div class="config-options">
+                    <label class="toggle-container" for="sound-toggle">
+                        Sound Effects
+                        <input type="checkbox" id="sound-toggle" checked>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <button id="start-btn" class="primary-btn pulse-anim">Start Quiz</button>
+                
+                <!-- Display High Score from Local Storage -->
+                <div class="high-score-display display-none" id="high-score-container">
+                    Your High Score: <span id="high-score-val">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="screen display-none">
+            <div class="glass-panel">
+                <header class="quiz-header">
+                    <div class="progress-container">
+                        <div class="progress-text">
+                            <span id="current-q-num">1</span> / <span id="total-q-num">10</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="quiz-progress"></div>
+                        </div>
+                    </div>
+                    <div class="score-container">
+                        Score: <span id="current-score">0</span>
+                    </div>
+                </header>
+
+                <div class="timer-container">
+                    <div class="timer-circle">
+                        <svg width="60" height="60" viewBox="0 0 60 60">
+                            <circle class="timer-bg" cx="30" cy="30" r="28"></circle>
+                            <circle class="timer-path" id="timer-path" cx="30" cy="30" r="28"></circle>
+                        </svg>
+                        <div class="timer-text" id="time-left">15</div>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <h2 id="question-text" class="question-text">Loading question...</h2>
+                </div>
+
+                <div class="options-container" id="options-container">
+                    <!-- Options injected via JS -->
+                </div>
+
+                <footer class="quiz-footer">
+                    <button id="next-btn" class="primary-btn display-none">Next Question</button>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="screen display-none">
+            <div class="glass-panel text-center">
+                <h1 class="result-title">Quiz Completed!</h1>
+                
+                <div class="score-display">
+                    <div class="score-circle">
+                        <div class="score-value" id="final-score">0</div>
+                        <div class="score-label">Points</div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card correct">
+                        <div class="stat-value" id="correct-answers">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card wrong">
+                        <div class="stat-value" id="wrong-answers">0</div>
+                        <div class="stat-label">Wrong</div>
+                    </div>
+                    <div class="stat-card missed">
+                        <div class="stat-value" id="missed-answers">0</div>
+                        <div class="stat-label">Missed</div>
+                    </div>
+                </div>
+
+                <div class="action-buttons block-actions">
+                    <button id="review-btn" class="secondary-btn">Review Answers</button>
+                    <button id="restart-btn" class="primary-btn">Play Again</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Review Screen -->
+        <div id="review-screen" class="screen display-none">
+            <div class="glass-panel">
+                <header class="review-header">
+                    <h2>Review Answers</h2>
+                    <button id="close-review-btn" class="icon-btn">&times;</button>
+                </header>
+                <div class="review-list" id="review-list">
+                    <!-- Reviewed questions injected via JS -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
